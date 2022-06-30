@@ -9,6 +9,7 @@ import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,11 @@ import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 public class SpringCloudEurekaClientSeriveConsumerApplication {
 	@Autowired
 	HelloClient client;
+	
+	@GetMapping("health")
+	public String health() {
+		return "ok";
+	}
 	
 	@RequestMapping("/")
 	@TimeLimiter(name = "defaults")
